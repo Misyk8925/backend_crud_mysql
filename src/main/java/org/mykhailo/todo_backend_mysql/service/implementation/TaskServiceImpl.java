@@ -18,8 +18,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<Task> getAllTasks() {
-        List<Task> tasks = taskRepository.findAll();
-        return tasks;
+        return taskRepository.findAll();
     }
 
     @Override
@@ -33,22 +32,23 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task getTaskById(long id) {
-        return null;
+        return taskRepository.findById(id).orElse(null);
     }
 
     @Override
     public Task getTaskByTitle(String title) {
-        return null;
+        return taskRepository.findTaskByTitle(title);
     }
 
     @Override
     public Task updateTask(Task task) {
-        return null;
+
+        return taskRepository.save(task);
     }
 
     @Override
     public void deleteTask(String title) {
-
+        taskRepository.deleteTaskByTitle(title);
     }
 
 }
