@@ -1,8 +1,10 @@
 package org.mykhailo.todo_backend_mysql.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.mykhailo.todo_backend_mysql.repository.UserRepository;
 
 @Entity
 @Data
@@ -24,4 +26,11 @@ public class Task {
 
     @Column(name = "date", nullable = false)
     public String date;
+
+    @ManyToOne
+    @JoinColumn(name = "user")
+    @JsonBackReference
+    private User user;
+
+
 }
