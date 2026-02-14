@@ -1,6 +1,5 @@
 package org.mykhailo.todo_backend_mysql.controller;
 
-import lombok.AllArgsConstructor;
 import org.mykhailo.todo_backend_mysql.model.Task;
 import org.mykhailo.todo_backend_mysql.service.TaskService;
 import org.springframework.http.HttpStatus;
@@ -11,11 +10,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/profile/tasks")
-@AllArgsConstructor
 @CrossOrigin("http://localhost:5173")
 public class TaskController {
 
     private final TaskService taskService;
+
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Task>> getAllTasks() {
@@ -29,10 +31,8 @@ public class TaskController {
 
     @PostMapping("/save")
     public ResponseEntity<Task> saveTask(@RequestBody Task task) {
-
-            Task savedTask = taskService.saveTask(task);
-            return new ResponseEntity<>(savedTask, HttpStatus.CREATED);
-
+        Task savedTask = taskService.saveTask(task);
+        return new ResponseEntity<>(savedTask, HttpStatus.CREATED);
     }
 
     @PutMapping("/update")

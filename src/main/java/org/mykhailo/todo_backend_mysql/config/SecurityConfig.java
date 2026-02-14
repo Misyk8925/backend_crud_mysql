@@ -40,7 +40,7 @@ public class SecurityConfig {
         return http.csrf(customizer -> customizer.disable()) // Отключение защиты от CSRF
                 .authorizeHttpRequests(request -> request
                         // Разрешить доступ к эндпоинтам для входа и регистрации без аутентификации
-                        .requestMatchers("api/auth/login", "api/auth/register").permitAll()
+                        .requestMatchers("/api/auth/login", "/api/auth/register").permitAll()
                         // Для всех остальных запросов требуется аутентификация
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults()) // Использование базовой HTTP-аутентификации
